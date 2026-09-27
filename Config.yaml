@@ -1,0 +1,61 @@
+# Edit the image dimensions and input paths before running Main.
+# Use a flat key: value mapping. Paths may be absolute or relative to this file.
+# Single quotes preserve backslashes in Windows paths.
+# Both dates must have the same dimensions and pixel alignment.
+lines: 1024
+samples: 1024
+
+# Each folder must contain C2 components, either directly or in a C2 subfolder.
+# Required files: C11.bin, C12_real.bin, C12_imag.bin, C22.bin.
+# Format: row-major, float32, little-endian; C11 = VH power, C22 = VV power.
+# T1 is the pre-event image; T2 is the post-event image.
+T1Path: 'data/pre_event'
+T2Path: 'data/post_event'
+
+# Output folder, created automatically. Existing detection files are replaced.
+outputDirectory: 'output'
+
+# HLT_rain applies the proposed rain correction; HLT uses the baseline measure.
+diffMethod: HLT_rain
+
+# Options: MS-MRF, Superpixel-SS-MRF, Pixel-SS-MRF, Otsu.
+# MS-MRF combines superpixel classification with boundary-band refinement.
+segmentationMethod: MS-MRF
+
+# polsar uses covariance features, edges, and local ENL.
+# reference uses MATLAB superpixels on the difference image.
+superpixelMethod: polsar
+
+# Target mean region area in pixels, not a side length or a region count.
+superpixelScale: 500
+
+# PolSAR clustering: iteration limit, spatial weight, and movement tolerance.
+superpixelMaxIter: 10
+superpixelBeta: 5
+superpixelTolerance: 10000
+
+# Optional difference-image feature weight; zero disables this feature.
+superpixelChangeWeight: 0
+
+# PolSAR edge windows must be odd integers of at least 3 pixels.
+# ENL window size is a positive integer in pixels.
+edgeWindowLength: 7
+edgeWindowWidth: 7
+enlWindowSize: 20
+
+# Maximum MRF iterations and superpixel-level regularization weight (lambda).
+mrfMaxIter: 5
+mrfLambda: 1.2
+
+# Pixel-level regularization weight, contrast bandwidth (eta), and band radius.
+mrfPixelLambda: 8.0
+mrfEta: 0.4
+mrfBoundaryRadius: 2
+
+# Gaussian standard-deviation floor and superpixel label-change stopping ratio.
+mrfMinSigma: 0.01
+mrfStopFraction: 0.001
+
+# Pixel unary weight and within-superpixel pairwise multiplier.
+mrfDataWeight: 1.0
+mrfIntraWeight: 1.5

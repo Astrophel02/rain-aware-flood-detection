@@ -1,4 +1,4 @@
-# Rain-aware flood detection with MS-MRF
+# Flood Detection under Rainfall Conditions from Dual-Polarization SAR Data via Enhanced Scattering Measure and Multiscale MRF Modelling
 
 This MATLAB package detects flood-related changes from a pair of co-registered,
 dual-polarization SAR covariance images. It contains the detection pipeline:
